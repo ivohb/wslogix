@@ -1,0 +1,58 @@
+login
+
+{
+ "codigo" : "ivo",
+ "senha" : "ivo"
+}
+
+inclusão de usário
+
+{
+ "codigo" : "maria",
+ "email" : "maria@gmail.com",
+ "cpf" : "44516869039",
+ "sexo" : "F"
+ }
+
+	private String codigo;
+	private String nome;	
+	private String sexo;
+	private String senha;
+	private String email;
+	private String cpf;
+
+  inclusão de usuário dependente
+  
+  {
+        "usuario":"apaula",
+        "dependente":"will",
+        "inicio": "2020-01-07",
+        "fim": "2020-01-10",
+        "motivo":"Licenca"
+  }
+
+alteração de usuário dependente
+ {
+        "inicio": "2020-01-07",
+        "fim": "2020-01-10",
+        "motivo":"Licenca"
+  }    
+
+inclusão de empresa
+
+{
+"codigo" : "03",
+"nome"   : "Metalúgica Albras",
+"cnpj"   : "38552416000",
+"pessoa" : "J" 
+}
+
+alteração de empresa
+
+{
+"nome"   : "Gruo Aceex",
+"cnpj"   : "64633118000130"
+}
+
+  
+  

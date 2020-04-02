@@ -1,0 +1,19 @@
+- Criação do projeto
+- Criação dos profiles de test e dev
+- Criação das classes de domínio (POJO)
+- Criação dos repositórios (vazios)
+- Criação dos resources (só com busca por id)
+- Criação dos services (só com busca por id)
+- Criação da exceção customizada ObjectNotFoundException
+- Implemantação dos resrces de usuário
+- Criação da autenticação e geração de token
+- Cração da autorização com a validação do token
+- Criação dos serviços de email (com texto plano e html)
+
+próximos passos:
+
+- Reforçar os testes no prifile de test
+- resources dos demais pojos
+- armazenamento de imagens (amazon)
+- colocar o projeto nas nuvens
+
