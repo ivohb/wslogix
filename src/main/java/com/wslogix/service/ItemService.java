@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.wslogix.dao.ItemDao;
 import com.wslogix.dto.EstoqueDto;
 import com.wslogix.exception.ObjectNotFoundException;
+import com.wslogix.key.ItemKey;
 import com.wslogix.model.Item;
-import com.wslogix.model.ItemPrimaryKey;
 
 @Service
 public class ItemService {
@@ -19,7 +19,7 @@ public class ItemService {
 	private ItemDao dao;
 
 	public Item findById(String empresa, String codigo) {
-		ItemPrimaryKey id = new ItemPrimaryKey(empresa, codigo);
+		ItemKey id = new ItemKey(empresa, codigo);
 		Optional<Item> obj = dao.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Não encontrado! key: " + empresa + "/"+ codigo + ", "

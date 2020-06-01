@@ -1,11 +1,14 @@
 package com.wslogix.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "empresa")
@@ -13,37 +16,37 @@ public class Empresa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "cod_empresa", length = 2, nullable = false)
+	@Column(name = "cod_empresa", length = 2)
 	private String id;
 
-	@Column(name = "den_empresa", length = 36, nullable = false)
+	@Column(name = "den_empresa", length = 36)
 	private String nome;
 
-	@Column(name = "den_reduz", length = 10, nullable = false)
+	@Column(name = "den_reduz", length = 10)
 	private String codinome;
 
-	@Column(name = "end_empresa", length = 36, nullable = false)
+	@Column(name = "end_empresa", length = 36)
 	private String endereco;
 
 	@Column(name = "den_bairro", length = 19)
 	private String bairro;
 
-	@Column(name = "den_munic", length = 30, nullable = false)
+	@Column(name = "den_munic", length = 30)
 	private String municipio;
 
-	@Column(name = "uni_feder", length = 2, nullable = false)
+	@Column(name = "uni_feder", length = 2)
 	private String uf;
 
-	@Column(name = "ins_estadual", length = 16, nullable = false)
+	@Column(name = "ins_estadual", length = 16)
 	private String incricao;
 
-	@Column(name = "num_cgc", length = 19, nullable = false)
+	@Column(name = "num_cgc", length = 19)
 	private String cnpj;
 
 	@Column(name = "num_caixa_postal", length = 5)
 	private String caixaPostal;
 
-	@Column(name = "cod_cep", length = 9, nullable = false)
+	@Column(name = "cod_cep", length = 9)
 	private String cep;
 
 	@Column(name = "num_telefone", length = 15)
@@ -62,13 +65,15 @@ public class Empresa implements Serializable {
 	private String regJunta;
 
 	@Column(name = "dat_inclu_junta", length = 10)
-	private String datIncJunta;
+	@JsonFormat(pattern="dd/MM/yyyy")
+	private Date datIncJunta;
 
 	@Column(name = "ies_filial", length = 1)
 	private String ehFilial;
 
-	@Column(name = "dat_fundacao", length = 10)
-	private String datFundacao;
+	@Column(name = "dat_fundacao")
+	@JsonFormat(pattern="dd/MM/yyyy")
+	private Date datFundacao;
 
 	@Column(name = "cod_cliente", length = 15)
 	private String codCliente;
@@ -217,11 +222,11 @@ public class Empresa implements Serializable {
 		this.regJunta = regJunta;
 	}
 
-	public String getDatIncJunta() {
+	public Date getDatIncJunta() {
 		return datIncJunta;
 	}
 
-	public void setDatIncJunta(String datIncJunta) {
+	public void setDatIncJunta(Date datIncJunta) {
 		this.datIncJunta = datIncJunta;
 	}
 
@@ -233,11 +238,11 @@ public class Empresa implements Serializable {
 		this.ehFilial = ehFilial;
 	}
 
-	public String getDatFundacao() {
+	public Date getDatFundacao() {
 		return datFundacao;
 	}
 
-	public void setDatFundacao(String datFundacao) {
+	public void setDatFundacao(Date datFundacao) {
 		this.datFundacao = datFundacao;
 	}
 
