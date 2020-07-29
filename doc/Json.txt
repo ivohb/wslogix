@@ -8,18 +8,14 @@ login
 inclusão de usário
 
 {
- "codigo" : "maria",
- "email" : "maria@gmail.com",
- "cpf" : "44516869039",
- "sexo" : "F"
+ "pessoa"    : "F",
+ "codigo"    : "ivo",
+ "nome"      : "Ivo Barbosa",
+ "email"     : "ivohb.me@gmail.com",
+ "cpfCnpj"   : "00167409808",
+ "perfil"    : "1",
+ "codigoErp" : "admlog"
  }
-
-	private String codigo;
-	private String nome;	
-	private String sexo;
-	private String senha;
-	private String email;
-	private String cpf;
 
   inclusão de usuário dependente
   

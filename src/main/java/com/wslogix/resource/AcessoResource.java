@@ -6,11 +6,13 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -35,6 +37,22 @@ public class AcessoResource {
 	public ResponseEntity<List<Acesso>> findAll() {
 		List<Acesso> list = service.findAll();
 		return ResponseEntity.ok().body(list);
+	}
+
+	// http://localhost:8081/perfil/page?linhas=100&pagina=2
+	
+	@RequestMapping(value="/page", method=RequestMethod.GET)
+	public ResponseEntity<Page<Acesso>> findPage(
+			@RequestParam(value="pagina", defaultValue="0") Integer pagina, 
+			@RequestParam(value="linhas", defaultValue="24") Integer qtdLinha, 
+			@RequestParam(value="ordem", defaultValue="perfil") String ordem, 
+			@RequestParam(value="direcao", defaultValue="ASC") String direcao,
+			@RequestParam(value="perfil", defaultValue="0") Integer perfil, 
+			@RequestParam(value="modulo", defaultValue="0") Integer modulo)	{
+		
+		Page<Acesso> list = service.findPage(
+				pagina, qtdLinha, ordem, direcao, perfil, modulo);
+		return ResponseEntity.ok().body(list); 
 	}
 
 	@RequestMapping(method=RequestMethod.POST)

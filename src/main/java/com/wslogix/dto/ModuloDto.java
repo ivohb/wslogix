@@ -18,13 +18,9 @@ public class ModuloDto implements Serializable {
 	@NotNull(message = "campo_obrigatorio")
 	@Length(min=3, max=25, message="tamanho_campo_invalido")
 	private String titulo;
-
-	@NotNull(message = "campo_obrigatorio")
-	@Length(min=3, max=25, message="tamanho_campo_invalido")
+	
 	private String path;
 
-	@NotNull(message = "campo_obrigatorio")
-	@Length(min=5, max=50, message="tamanho_campo_invalido")
 	private String icone;
 	
 	@Pattern(regexp="[AIS]", message = "conteudo_invalido")

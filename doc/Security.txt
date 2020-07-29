@@ -1,0 +1,16 @@
+1) Adicionar libs:
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+
+Isso feito, todos os end points já ficarão bloqueados necessitando de autorizações
+
+2) criar a classe SecurityConfig, para deerminar que precisará ou não de autorizações.		

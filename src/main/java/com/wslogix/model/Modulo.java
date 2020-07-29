@@ -21,7 +21,7 @@ public class Modulo implements Serializable {
 	@Column(length = 25, unique = true, nullable = false)
 	private String titulo;
 
-	@Column(length = 25, unique = true, nullable = false)
+	@Column(length = 25)
 	private String path;
 
 	@Column(length = 50)
@@ -31,6 +31,12 @@ public class Modulo implements Serializable {
 	private String situacao;
 
 	public Modulo() {}
+
+	public Modulo(Integer id, String titulo, String path) {
+		this.id = id;
+		this.titulo = titulo;
+		this.path = path;
+	}
 
 	public Integer getId() {
 		return id;
@@ -71,5 +77,4 @@ public class Modulo implements Serializable {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
-
 }

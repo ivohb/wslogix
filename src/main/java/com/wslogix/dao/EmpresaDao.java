@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wslogix.model.Empresa;
 
-@Repository
+@Repository                                      //entidade tipo do id
 public interface EmpresaDao extends JpaRepository<Empresa, String>  {
 
 	//Na Entidade EmpresaLogix, o codigo foi mapeado como id

@@ -12,7 +12,7 @@ import com.wslogix.dto.EstoqueDto;
 import com.wslogix.key.ItemKey;
 import com.wslogix.model.Item;
 
-@Repository                                           
+@Repository                                  //entidade tipo do id                
 public interface ItemDao extends JpaRepository<Item, ItemKey>  {
 		
 	@Transactional(readOnly=true)

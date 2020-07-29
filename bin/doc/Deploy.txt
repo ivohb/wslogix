@@ -1,0 +1,66 @@
+deploy do projeto:
+- no pom.xml, na tag build, acrescentar os plugins abaixo:
+ 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+    			<artifactId>maven-surefire-plugin</artifactId>
+    			<configuration>
+        			<testFailureIgnore>true</testFailureIgnore>
+   				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+gerara o jar
+- no pom.xml alterar a tag packaging: <packaging>jar</packaging>
+- no pom.xml, se existir, tirar a dependencia:
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+Obs: essa dependencia instrui o spring a usar tomcat interno só durante
+     o desenvolvimento/teste. Ao gerar o daploy, ele vai descartar o tomcat interno
+
+- na classe principal do projeto AprovardocumApplication tirar, se existir:
+  extends SpringBootServletInitializer  
+  
+- Salvar todas as alterações
+- botão direito do mouse sobre o projeto, selecionar Run as + maven build, prencher o campo   
+  Goals com clean package e clicar em Run
+
+gerara o war
+- no pom.xml alterar a tag packaging: <packaging>war</packaging>
+- no pom.xml, acrescentar a dependencia:
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+Obs: essa dependencia instrui o spring a usar tomcat interno só durante
+     o desenvolvimento/teste. Ao gerar o daploy, ele vai descartar o tomcat interno
+
+- na classe principal do projeto AprovardocumApplication acrescentar:
+  extends SpringBootServletInitializer  
+  
+- Salvar todas as alterações
+- botão direito do mouse sobre o projeto, selecionar Run as + maven build, prencher o campo   
+  Goals com clean package e clicar em Run
+  
+ Obs: os aruivos .jar ou .war serão gerados na sub-pasta target do projeto
+ No caso do .war, para acessar os end points será necessário acrescentar o nome do projeto
+ antes do nome do end-point. Ex localhost:8080/aprovardocum/usuario
+      

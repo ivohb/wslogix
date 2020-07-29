@@ -1128,6 +1128,12 @@ public class Biblioteca implements Serializable {
 	
 	}
 
+	public String blank(String value) {
+	    if (value == null) {
+	        value = "";
+	    }
+	    return value;
+	}
 }
 
 

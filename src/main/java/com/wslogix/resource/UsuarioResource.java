@@ -85,9 +85,9 @@ public class UsuarioResource {
 	public ResponseEntity<List<UsuarioDto>> findByParametros(
 			@RequestParam(value="codigo", defaultValue="") String codigo,
 			@RequestParam(value="nome", defaultValue="") String nome,
-			@RequestParam(value="cpf", defaultValue="") String cpf)	{
+			@RequestParam(value="cpfCnpj", defaultValue="") String cpfCnpj)	{
 		
-		List<Usuario> list = service.findByParametros(codigo,nome,cpf);
+		List<Usuario> list = service.findByParametros(codigo,nome,cpfCnpj);
 		List<UsuarioDto> listDto = 
 				list.stream().map(obj -> new UsuarioDto(obj)).collect(Collectors.toList());  
 		return ResponseEntity.ok().body(listDto);
@@ -115,9 +115,14 @@ public class UsuarioResource {
 			@RequestParam(value="pagina", defaultValue="0") Integer pagina, 
 			@RequestParam(value="linhas", defaultValue="24") Integer qtdLinha, 
 			@RequestParam(value="ordem", defaultValue="nome") String ordem, 
-			@RequestParam(value="direcao", defaultValue="ASC") String direcao) {
+			@RequestParam(value="direcao", defaultValue="ASC") String direcao,
+			@RequestParam(value="codigo", defaultValue="") String codigo,
+			@RequestParam(value="nome", defaultValue="") String nome,
+			@RequestParam(value="pessoa", defaultValue="") String pessoa,
+			@RequestParam(value="cpfCnpj", defaultValue="") String cpfCnpj)	{
 		
-		Page<Usuario> list = service.findPage(pagina, qtdLinha, ordem, direcao);
+		Page<Usuario> list = service.findPage(
+				pagina, qtdLinha, ordem, direcao, codigo, nome, pessoa, cpfCnpj);
 		Page<UsuarioDto> listDto = list.map(obj -> new UsuarioDto(obj));  
 		return ResponseEntity.ok().body(listDto);
 	}

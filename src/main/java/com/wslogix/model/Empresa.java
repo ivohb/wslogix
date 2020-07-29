@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -73,6 +75,7 @@ public class Empresa implements Serializable {
 
 	@Column(name = "dat_fundacao")
 	@JsonFormat(pattern="dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date datFundacao;
 
 	@Column(name = "cod_cliente", length = 15)

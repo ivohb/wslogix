@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.wslogix.dao.PerfilDao;
@@ -25,6 +28,14 @@ public class PerfilService {
 
 	public List<Perfil> findAll() {
 		return dao.findAll();
+	}
+
+	public Page<Perfil> findPage(Integer pagina, Integer qtdLinha, 
+			String ordem, String direcao, String nome) {
+		
+		PageRequest pageRequest = PageRequest.of(pagina, qtdLinha, 
+				Direction.valueOf(direcao), ordem);
+		return dao.findPage(nome, pageRequest);
 	}
 
 	public Perfil fromDTO(PerfilDto dto) {

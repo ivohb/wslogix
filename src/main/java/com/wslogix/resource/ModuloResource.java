@@ -6,11 +6,13 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -37,6 +39,26 @@ public class ModuloResource {
 	public ResponseEntity<List<Modulo>> findAll() {
 					
 		List<Modulo> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+
+	@RequestMapping(value="/page", method=RequestMethod.GET)
+	public ResponseEntity<Page<Modulo>> findPage(
+			@RequestParam(value="pagina", defaultValue="0") Integer pagina, 
+			@RequestParam(value="linhas", defaultValue="24") Integer qtdLinha, 
+			@RequestParam(value="ordem", defaultValue="titulo") String ordem, 
+			@RequestParam(value="direcao", defaultValue="ASC") String direcao,
+			@RequestParam(value="titulo", defaultValue="") String titulo,
+			@RequestParam(value="situacao", defaultValue="") String situacao)	{
+		
+		Page<Modulo> list = service.findPage(
+				pagina, qtdLinha, ordem, direcao, titulo, situacao);
+		return ResponseEntity.ok().body(list);
+	}
+
+	@RequestMapping(value="/{perfil}/acessos", method=RequestMethod.GET)
+	public ResponseEntity<List<Modulo>> findModulos(@PathVariable Integer perfil) {
+		List<Modulo> list = service.findModulos(perfil);
 		return ResponseEntity.ok().body(list);
 	}
 

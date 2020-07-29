@@ -37,7 +37,6 @@ public class EmpresaService {
 	public List<Empresa> findAll() {
 		return dao.findAll();
 	}
-
 	public List<Empresa> findAuth() {
 		List<Empresa> lista = dao.findAuth();
 		Biblioteca bib = new Biblioteca();
@@ -60,6 +59,11 @@ public class EmpresaService {
 	public void saveKey(String cnpj, String chave) {
 		cnpj = "0"+cnpj;
 		dao.saveKey(cnpj, chave);
+	}
+
+	public Empresa insert(Empresa obj) {
+		obj = dao.save(obj);
+		return obj;
 	}
 
 }

@@ -1,0 +1,13 @@
+1) Edi cliente
+- Criar tabelas do tipo mestre-detalhe
+- Deverá ser criada uma lista de programação para cada produto.
+- Cada produto só poderá ter uma lista em elaboração (campo situacao = E)
+- A tabela mestre deverá conter, entre outros, o pedido de compra e o produto
+- Na tabela de detalhes, a date de entrega não poderá se repetir
+- Para incluir uma nova lista de um deteminado peoduto, o cliente poderá
+  iniciar do zero ou clonar uma lista pré existente e fazer as correções.
+  Nesse caso, a clonagem deverá descarar as progamações do tipo C (confirmada)
+- Na inegração com a carteira, o usuário deverá selecionar uma lista com
+  situacao = C (concluida) e, após a integração, marcar a lista com situação = I (integrada)
+    
+    

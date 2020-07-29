@@ -1,0 +1,35 @@
+- front end envia usuário e senha para o endpoint /login do tipo POST
+    ex: {"codigo":"ivo","senha":"Ivo@123"}
+    
+- back end valida e retorna um token no headers.authorization
+    Obs: a partir de agora toda requisição deverá enviar o token 
+    
+- front end pesquisa aprovadores no endpoint /usuario/aprovadores do tipo GET
+    Obs: nenhum parâmetro pecisa ser enviado
+    
+- back end retorna uma lista de usuários com codigo/nome
+  ex: [{"codigo":"will","nome":"Willians"},{"codigo":"ivo","nome":"Ivo"}]
+
+- front end permite ao usuário a escolha do usuário cujos ducumentos etão pendentes 
+  de aprovação e o envia para o endpoint ???
+  
+- back end retorna uma lista dos documentos pendentes de aprovação
+
+- front end permite ao usuário a escolha de um ou mais documentos a aprovar e os submete
+  ao endpoint ???
+  Obs: nesse momento, front end deve disponibilizar ao usuário a possibilidade do mesmo
+       poder consultar os textos (*) de um determinado documento, bem como consultar os
+       detalhes (**) de determinado documento.
+
+- back end procede a aprovação dos documentos e retorna uma lista dos que foram aprovados e
+  os que noão puderam ser aprovados por algum motivo.
+         
+- * front end envia o documento para o endpoint ??? 
+
+- back end retorna uma lista com os textos
+
+- ** front end envia o documento para o endpoint ??? 
+
+- back end retorna uma lista com os detalhes do documento
+
+  

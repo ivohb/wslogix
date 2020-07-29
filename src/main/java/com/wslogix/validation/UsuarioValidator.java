@@ -20,6 +20,7 @@ import com.wslogix.model.Perfil;
 import com.wslogix.model.Usuario;
 import com.wslogix.model.UsuarioLogix;
 import com.wslogix.service.UsuarioService;
+import com.wslogix.util.Biblioteca;
 
 
 public class UsuarioValidator 
@@ -78,30 +79,54 @@ public class UsuarioValidator
 
 		if (dto.getCodigo() == null || dto.getCodigo().isEmpty() ) {
 		} else {
-			userLogix = userLogDao.findByCodigo(dto.getCodigo());
-			if (userLogix == null) {
-				list.add(new FieldMessage("codigo", "usuario_nao_existe_no_rp"));
-			} else {
-				if (uriId == 0) {
-					obj = dao.findByCodigo((dto.getCodigo()));
-					if (obj != null) {
-						list.add(new FieldMessage("codigo", "objeto_ja_existe"));
-					}
-				}
+			if (uriId == 0) {
+				obj = dao.findByCodigo((dto.getCodigo()));
+				if (obj != null) {
+					list.add(new FieldMessage("codigo", "objeto_ja_existe"));
+			}
 			}
 		}
 
-		if (dto.getCpf() == null || dto.getCpf().isEmpty()) {
-		} else {
-			obj = dao.findByCpf(dto.getCpf());				
-			if (obj != null) {
-				if (uriId == 0) {
-					list.add(new FieldMessage("cpf", "objeto_ja_existe"));
-				} else {
-					if (uriId != obj.getId()) {
-						list.add(new FieldMessage("cpf", "objeto_ja_existe"));
-					}					
+		if (uriId == 0) {
+			if (dto.getSenha() == null || dto.getSenha().isEmpty()) {
+				list.add(new FieldMessage("senha", "conteudo_invalido"));
+			} else {
+				if (!ValidaSenha.isValidSenha(dto.getSenha())) {
+					list.add(new FieldMessage("senha", "senha_insegura"));
 				}
+			}			
+		}
+
+		if (dto.getCodigoErp() == null || dto.getCodigoErp().isEmpty() ) {
+		} else {
+			userLogix = userLogDao.findByCodigo(dto.getCodigoErp());
+			if (userLogix == null) {
+				list.add(new FieldMessage("codigoErp", "objeto_nao_existe_no_rp"));
+			}
+		}
+
+		if (dto.getCpfCnpj() == null || dto.getCpfCnpj().isEmpty()) {
+		} else {
+			Biblioteca bib = new Biblioteca();
+			boolean result = false;
+			if (dto.getPessoa().equalsIgnoreCase("F")) {
+				result = bib.isCpf(dto.getCpfCnpj());
+			} else {
+				result = bib.isCnpj(dto.getCpfCnpj());
+			}
+			if (result) {
+				obj = dao.findByCpfCnpj(dto.getCpfCnpj());				
+				if (obj != null) {
+					if (uriId == 0) {
+						list.add(new FieldMessage("cpfCnpj", "objeto_ja_existe"));
+					} else {
+						if (uriId != obj.getId()) {
+							list.add(new FieldMessage("cpfCnpj", "objeto_ja_existe"));
+						}					
+					}
+				}
+			} else {
+				list.add(new FieldMessage("cpfCnpj", "cpf_cnpj_invalido"));
 			}
 		}
 
