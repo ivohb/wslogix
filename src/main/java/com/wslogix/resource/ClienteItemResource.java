@@ -64,4 +64,12 @@ public class ClienteItemResource {
 		return ResponseEntity.ok().body(list);
 	}
 
+	@RequestMapping(value="/empresa", method=RequestMethod.GET)
+	public ResponseEntity<List<ClienteItem>> findByEmpresa(
+			@RequestParam(value="empresa", defaultValue="") String empresa)	{
+
+		List<ClienteItem> list = service.findByEmpresa(empresa);
+		return ResponseEntity.ok().body(list);
+	}
+
 }

@@ -30,6 +30,12 @@ public interface EdiClienteDao extends JpaRepository<EdiCliente, Integer>  {
 			String cliente, String pedido, String produto);
 
 	@Transactional(readOnly=true)
+	public List<EdiCliente> findByEmpresa(String empresa);
+
+	@Transactional(readOnly=true)
+	public List<EdiCliente> findByEmpresaAndSituacao(String empresa, String situacao);
+
+	@Transactional(readOnly=true)
 	public EdiCliente findByEmpresaAndClienteAndPedidoAndProdutoAndSituacao(String empresa, 
 			String cliente,	String pedido, String produto, String situacao);
 

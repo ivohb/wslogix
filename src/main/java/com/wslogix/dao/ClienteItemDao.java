@@ -42,4 +42,9 @@ public interface ClienteItemDao extends JpaRepository<ClienteItem, ClienteItemKe
 			+ "WHERE obj.id.empresa = :empresa")
 	public Integer countByEmpresa(@Param("empresa") String empresa);
 
+	@Transactional(readOnly=true)
+	@Query("SELECT obj FROM ClienteItem obj "
+			+ "WHERE obj.id.empresa = :empresa")
+	public List<ClienteItem> findByEmpresa(String empresa);
+
 }

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.wslogix.dto.EdiClienteDto;
-import com.wslogix.dto.ModuloDto;
 import com.wslogix.model.EdiCliente;
 import com.wslogix.service.EdiClienteService;
 
@@ -39,6 +38,23 @@ public class EdiClienteResource {
 	public ResponseEntity<List<EdiCliente>> findAll() {
 					
 		List<EdiCliente> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+
+	@RequestMapping(value="/empresa", method=RequestMethod.GET)
+	public ResponseEntity<List<EdiCliente>> findByEmpresa(
+			@RequestParam(value="empresa") String empresa) {
+
+		List<EdiCliente> list = service.findByEmpresa(empresa);
+		return ResponseEntity.ok().body(list);
+	}
+
+	@RequestMapping(value="/empresa/situacao", method=RequestMethod.GET)
+	public ResponseEntity<List<EdiCliente>> findByEmpresaAndSituacao(
+			@RequestParam(value="empresa") String empresa,
+			@RequestParam(value="situacao") String situacao) {
+
+		List<EdiCliente> list = service.findByEmpresaAndSituacao(empresa, situacao);
 		return ResponseEntity.ok().body(list);
 	}
 

@@ -38,6 +38,14 @@ public class EdiClienteService {
 		return dao.findByPeriodo(inicio, fim);
 	}
 
+	public List<EdiCliente> findByEmpresa(String empresa) {
+		return dao.findByEmpresa(empresa);
+	}
+
+	public List<EdiCliente> findByEmpresaAndSituacao(String empresa, String situacao) {
+		return dao.findByEmpresaAndSituacao(empresa, situacao);
+	}
+
 	public Page<EdiCliente> findPage(Integer pagina, Integer qtdLinha, 
 			String ordem, String direcao, String pedido, String produto, String situacao) {
 		

@@ -46,10 +46,12 @@ public class ClienteItemService {
 		return dao.countByEmpresa(empresa);		
 	}
 
-	
-	
 	public List<ClienteItem> findAll() {
 		return dao.findAll();
+	}	
+	
+	public List<ClienteItem> findByEmpresa(String empresa) {
+		return dao.findByEmpresa(empresa);
 	}
 
 }

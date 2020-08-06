@@ -15,8 +15,8 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "ws_edi_programacao")
-public class EdiProgramacao implements Serializable {
+@Table(name = "ws_edi_client_program")
+public class EdiClientProgram implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,7 +35,7 @@ public class EdiProgramacao implements Serializable {
 	@Column(length = 1, nullable = false)
 	private String tipo; // C=Confirmada P=Planejada
 
-	public EdiProgramacao() {}
+	public EdiClientProgram() {}
 
 	public Integer getId() {
 		return id;

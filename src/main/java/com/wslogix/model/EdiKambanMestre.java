@@ -1,5 +1,5 @@
 package com.wslogix.model;
 
-public class EdiKamban {
+public class EdiKambanMestre {
 
 }
