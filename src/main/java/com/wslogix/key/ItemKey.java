@@ -1,4 +1,4 @@
-package com.wslogix.model;
+package com.wslogix.key;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Embeddable
 @Table(name = "item")
-public class ItemPrimaryKey implements Serializable {
+public class ItemKey implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "cod_empresa", length = 2)
@@ -18,9 +18,9 @@ public class ItemPrimaryKey implements Serializable {
 	@Column(name = "cod_item", length = 15)
 	private String codigo;
 
-	public ItemPrimaryKey() { }
+	public ItemKey() { }
 
-	public ItemPrimaryKey(String empresa, String codigo) {
+	public ItemKey(String empresa, String codigo) {
 		super();
 		this.empresa = empresa;
 		this.codigo = codigo;

@@ -7,13 +7,15 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.wslogix.key.ItemKey;
+
 @Entity
 @Table(name = "item")
 public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private ItemPrimaryKey id = new ItemPrimaryKey();
+	private ItemKey id = new ItemKey();
 		
 	@Column(name = "den_item", length = 76)
 	private String nome;

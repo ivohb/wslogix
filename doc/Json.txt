@@ -8,11 +8,14 @@ login
 inclusão de usário
 
 {
- "codigo" : "maria",
- "email" : "maria@gmail.com",
+ "codigo" : "admlog",
+ "nome" : "Administrador do sistema",
+ "email" : "cantor.ivo.jose@gmail.com",
  "cpf" : "44516869039",
- "sexo" : "F"
+ "sexo" : "M",
+ "perfil" : "1"
  }
+
 
 	private String codigo;
 	private String nome;	

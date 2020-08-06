@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wslogix.dto.EstoqueDto;
+import com.wslogix.key.ItemKey;
 import com.wslogix.model.Item;
-import com.wslogix.model.ItemPrimaryKey;
 
 @Repository                                           
-public interface ItemDao extends JpaRepository<Item, ItemPrimaryKey>  {
+public interface ItemDao extends JpaRepository<Item, ItemKey>  {
 		
 	@Transactional(readOnly=true)
 	@Query("SELECT obj FROM Item obj "

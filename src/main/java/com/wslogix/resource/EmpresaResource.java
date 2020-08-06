@@ -1,5 +1,6 @@
 package com.wslogix.resource;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -33,6 +34,15 @@ public class EmpresaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
+	@RequestMapping(value="/data", method=RequestMethod.GET)
+	public ResponseEntity<List<Empresa>> findByDate(
+			@RequestParam(value="data", defaultValue="") Date data) {
+				
+		List<Empresa> list = service.findByDate(data);
+		return ResponseEntity.ok().body(list);
+		
+	}
+		
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Empresa>> findAll() {
 		List<Empresa> list = service.findAll();

@@ -1,5 +1,6 @@
 package com.wslogix.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -38,4 +39,9 @@ public interface EmpresaDao extends JpaRepository<Empresa, String>  {
 	@Transactional(readOnly=true)
 	public Empresa findByCnpj(String cnpj);
 	
+	@Transactional(readOnly=true)
+	@Query("SELECT obj FROM Empresa obj "
+			+ "WHERE obj.datFundacao >= :data ")
+	public List<Empresa> findByDate(@Param("data") Date data);
+
 }

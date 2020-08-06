@@ -1,6 +1,7 @@
 package com.wslogix.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,10 @@ public class EmpresaService {
 		}
 		
 		return empresaAuth;
+	}
+
+	public List<Empresa> findByDate(Date data) {
+		return dao.findByDate(data);
 	}
 
 	public void saveKey(String cnpj, String chave) {
