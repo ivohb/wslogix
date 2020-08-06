@@ -83,10 +83,11 @@ public class Empresa implements Serializable {
 
 	public Empresa() {}
 	
-	public Empresa(String id, String nome, String codinome) {
+	public Empresa(String id, String codinome, String nome, String cnpj ) {
 		this.id = id;
-		this.nome = nome;
 		this.codinome = codinome;
+		this.nome = nome;
+		this.cnpj = cnpj;
 	}	
 
 	public Empresa(String id, String codinome, String nome, String cnpj, String chave) {

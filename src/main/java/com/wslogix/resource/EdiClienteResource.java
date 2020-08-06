@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.wslogix.dto.EdiClienteDto;
+import com.wslogix.dto.ModuloDto;
 import com.wslogix.model.EdiCliente;
-import com.wslogix.model.Processo;
 import com.wslogix.service.EdiClienteService;
 
 @RestController
@@ -60,6 +60,20 @@ public class EdiClienteResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 			.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(
+			@Valid @RequestBody EdiClienteDto dto, @PathVariable Integer id) {
+		
+		service.update(dto, id);
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }

@@ -16,8 +16,9 @@ public class UsuarioDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UsuarioDao dao;
-
-	/*Busca usuário pelo codigo de login e retorna um Usuario Spring Security*/
+	
+	/* Chamado implicitamente pela classe UserSecurityService
+	 * Busca usuário pelo codigo de login e retorna um Usuario Spring Security*/
 
 	@Override
 	public UserDetails loadUserByUsername(String codigo) throws UsernameNotFoundException {
@@ -25,6 +26,7 @@ public class UsuarioDetailsService implements UserDetailsService {
 		if (obj == null) {
 			throw new UsernameNotFoundException(codigo);
 		}
-		return new UsuarioSS(obj.getId(), obj.getCodigo(), obj.getSenha(),obj.getPerfil());
+		return new UsuarioSS(obj.getId(), 
+				obj.getCodigo(), obj.getSenha(),obj.getPerfil(), obj.getCpfCnpj());
 	}
 }

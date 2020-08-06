@@ -16,16 +16,18 @@ public class UsuarioSS implements UserDetails {
 	private String codigo;
 	private String senha;
 	private Integer perfil;
+	private String cnpj;
 	
 	public UsuarioSS() {
 	}	
 
-	public UsuarioSS(Integer id, String codigo, String senha, Integer perfil) {
+	public UsuarioSS(Integer id, String codigo, String senha, Integer perfil, String cnpj) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.senha = senha;
 		this.perfil = perfil;
+		this.cnpj = cnpj;
 	}
 
 	public Integer getId() {
@@ -35,7 +37,11 @@ public class UsuarioSS implements UserDetails {
 	public Integer getPerfil() {
 		return perfil;
 	}
-
+	
+	public String getCnpj( ) {
+		return cnpj;
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

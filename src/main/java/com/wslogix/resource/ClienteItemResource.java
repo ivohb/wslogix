@@ -42,12 +42,12 @@ public class ClienteItemResource {
 	//http://localhost:8081/cliente/item/item?cliente=1&item=003
 	
 	@RequestMapping(value="/item/cliente", method=RequestMethod.GET)
-	public ResponseEntity<ClienteItem> findByClienteAnditemCliente(
+	public ResponseEntity<List<ClienteItem>> findByClienteAnditemCliente(
 			@RequestParam(value="empresa", defaultValue="") String empresa,
 			@RequestParam(value="cliente", defaultValue="") String cliente,
-			@RequestParam(value="item", defaultValue="") String item)	{
+			@RequestParam(value="itemCliente", defaultValue="") String itemCliente)	{
 
-		ClienteItem obj = service.findByClienteAnditemCliente(empresa, cliente, item);
+		List<ClienteItem> obj = service.findByClienteAnditemCliente(empresa, cliente, itemCliente);
 		return ResponseEntity.ok().body(obj);
 	}
 

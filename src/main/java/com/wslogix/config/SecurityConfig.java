@@ -46,6 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		"/auth/forgot/**"
 	};
 
+	//métodos PATCH que precisam ser acessandos antes do login
+	//autorização de empresa, por exemplo
+	private static final String[] PUBLIC_MATCHERS_PATCH = {
+			"/empresa/**"
+	};
+
 	//não basta só criar os vetores aceima. É preciso também dar
 	//permissão no método abaixo
 	@Override
@@ -56,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() //do PUBLIC_MATCHERS_GET
 			.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()//e do PUBLIC_MATCHERS_POST
+			.antMatchers(HttpMethod.PATCH, PUBLIC_MATCHERS_PATCH).permitAll()//e do PUBLIC_MATCHERS_POST
 			.anyRequest().authenticated(); //todo restante deve ser bloqueado
 
 		//não permitirá criação de sessão para o usuário

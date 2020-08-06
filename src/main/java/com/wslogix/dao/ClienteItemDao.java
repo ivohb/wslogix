@@ -1,5 +1,7 @@
 package com.wslogix.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,7 +34,7 @@ public interface ClienteItemDao extends JpaRepository<ClienteItem, ClienteItemKe
 			+ "WHERE obj.id.empresa = :empresa"
 			+ " AND obj.id.cliente = :cliente"
 			+ " AND itemCliente = :itemCliente ")
-	public ClienteItem findByClienteAnditemCliente(@Param("empresa") String empresa,
+	public List<ClienteItem> findByClienteAnditemCliente(@Param("empresa") String empresa,
 			@Param("cliente") String cliente, @Param("itemCliente") String itemCliente);
 
 	@Transactional(readOnly=true)

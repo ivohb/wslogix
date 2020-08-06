@@ -22,7 +22,13 @@ public class EdiCliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
+
+	@Column(length = 2, nullable = false)
+	private String empresa;
+
+	@Column(length = 15, nullable = false)
+	private String cliente;
+
 	@Column(length = 30, nullable = false)
 	private String pedido;
 
@@ -47,6 +53,22 @@ public class EdiCliente implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 
 	public String getPedido() {

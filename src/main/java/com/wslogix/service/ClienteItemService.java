@@ -37,7 +37,7 @@ public class ClienteItemService {
 		return obj;
 	}
 
-	public ClienteItem findByClienteAnditemCliente(
+	public List<ClienteItem> findByClienteAnditemCliente(
 			String empresa, String cliente, String itemCliente) {
 		return dao.findByClienteAnditemCliente(empresa, cliente, itemCliente);		
 	}

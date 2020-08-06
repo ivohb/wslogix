@@ -22,11 +22,8 @@ public interface EmpresaDao extends JpaRepository<Empresa, String>  {
 	public Empresa findByCodigo(@Param("codigo") String codigo);
 
 	@Transactional(readOnly=true)
-	public List<Empresa> findAll();
-
-	@Transactional(readOnly=true)
 	@Query("SELECT new Empresa("
-			+ "obj.id, obj.nome, obj.codinome, obj.cnpj, obj.chave) "
+			+ "obj.id, obj.codinome, obj.nome, obj.cnpj, obj.chave) "
 			+ "FROM Empresa obj WHERE obj.chave IS NOT NULL")
 	public List<Empresa> findAuth();
 

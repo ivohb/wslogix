@@ -28,9 +28,9 @@ import com.wslogix.dto.CredenciaisDTO;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-	private AuthenticationManager authenticationManager;
-    
+	private AuthenticationManager authenticationManager;    
     private JWTUtil jwtUtil;
+    private String empresa;
 
     public JWTAuthenticationFilter(
     		AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
@@ -52,8 +52,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			//pega os dados da requisição (codigo/senha)
 			CredenciaisDTO creds = new ObjectMapper()
 	                .readValue(req.getInputStream(), CredenciaisDTO.class);
-	
-			//Para autenticar, passa-se do codigo, senha e uma lsta vazia
+			
+			this.empresa = creds.getEmpresa();
+			
+			//Para autenticar, passa-se o codigo, senha e uma lsta vazia
 	        UsernamePasswordAuthenticationToken authToken = 
 	        		new UsernamePasswordAuthenticationToken(
 	        				creds.getCodigo(), creds.getSenha(), new ArrayList<>());
@@ -94,6 +96,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         res.addHeader("Profile", profile);
         //disponibiliza o cabeçalho Profile para que a aplicação possa capiturá-lo
         res.addHeader("access-control-expose-headers", "Profile");
+
+        res.addHeader("Empresa", this.empresa);
+        //disponibiliza o cabeçalho Empresa para que a aplicação possa capiturá-la
+        res.addHeader("access-control-expose-headers", "Empresa");
 
 	}
 	

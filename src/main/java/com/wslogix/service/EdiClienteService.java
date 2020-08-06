@@ -21,6 +21,8 @@ public class EdiClienteService {
 
 	@Autowired
 	private EdiClienteDao dao;
+	@Autowired
+	private ClienteService cliService;
 	
 	public EdiCliente findById(Integer id) {
 		Optional<EdiCliente> obj = dao.findById(id);
@@ -45,7 +47,11 @@ public class EdiClienteService {
 	}
 
 	public EdiCliente fromDTO(EdiClienteDto dto) {
+		UsuarioSS user = UserSecurityService.authenticated();
+        String cliente = cliService. findByCnpj(user.getCnpj());
 		EdiCliente obj = new EdiCliente();
+		obj.setEmpresa(dto.getEmpresa());
+		obj.setCliente(cliente);
 		obj.setPedido(dto.getPedido());
 		obj.setProduto(dto.getProduto());
 		return obj;

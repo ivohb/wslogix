@@ -14,6 +14,12 @@ public class EdiClienteDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+	@NotNull(message = "campo_obrigatorio")
+	@Length(min=1, max=2, message="tamanho_campo_invalido")
+	private String empresa;
+	
+	private String cliente;
 
 	@NotNull(message = "campo_obrigatorio")
 	@Length(min=1, max=30, message="tamanho_campo_invalido")
@@ -29,6 +35,8 @@ public class EdiClienteDto implements Serializable {
 		this.id = obj.getId();
 		this.pedido = obj.getPedido();
 		this.produto = obj.getProduto();
+		this.cliente = obj.getCliente();
+		this.empresa = obj.getEmpresa();
 	}
 
 	public Integer getId() {
@@ -37,6 +45,22 @@ public class EdiClienteDto implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 
 	public String getPedido() {

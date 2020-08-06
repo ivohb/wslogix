@@ -20,10 +20,18 @@ public interface EdiClienteDao extends JpaRepository<EdiCliente, Integer>  {
 	public List<EdiCliente> findByPedido(String pedido);
 
 	@Transactional(readOnly=true)
-	public List<EdiCliente> findByPedidoAndProduto(String pedido, String produto);
+	public List<EdiCliente> findByCliente(String cliente);
 
 	@Transactional(readOnly=true)
-	public EdiCliente findByPedidoAndProdutoAndSituacao(String pedido, String produto, String situacao);
+	public List<EdiCliente> findByClienteAndPedido(String cliente, String pedido);
+
+	@Transactional(readOnly=true)
+	public List<EdiCliente> findByClienteAndPedidoAndProduto(
+			String cliente, String pedido, String produto);
+
+	@Transactional(readOnly=true)
+	public EdiCliente findByEmpresaAndClienteAndPedidoAndProdutoAndSituacao(String empresa, 
+			String cliente,	String pedido, String produto, String situacao);
 
 	@Transactional(readOnly=true)
 	@Query("SELECT obj FROM EdiCliente obj "

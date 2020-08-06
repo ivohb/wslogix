@@ -121,7 +121,12 @@ public class Cliente implements Serializable {
 	private Integer codLocal;
 			
     public Cliente() {}
-    
+
+    public Cliente(String id, String codinome) {
+    	this.id = id;
+    	this.codinome = codinome;
+    }
+
     public Cliente(String id, String nome, String cnpj) {
     	this.id = id;
     	this.nome = nome;
