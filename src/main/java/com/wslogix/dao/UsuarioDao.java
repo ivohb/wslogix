@@ -2,6 +2,8 @@ package com.wslogix.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,27 +22,15 @@ public interface UsuarioDao extends JpaRepository<Usuario, Integer>  {
 	public Usuario findNameFromCodigo(@Param("codigo") String codigo);
 
 	@Transactional(readOnly=true)
-	@Query("SELECT obj FROM Usuario obj "
-			+ "WHERE obj.codigo = :codigo")
-	public Usuario findByLogin(@Param("codigo") String codigo);
-
-	@Transactional(readOnly=true)
 	public Usuario findByCodigo(String codigo);
 
 	@Transactional(readOnly=true)
 	@Query("SELECT obj FROM Usuario obj "
 			+ " WHERE obj.codigo LIKE %:codigo%"
 			+ " AND obj.nome LIKE %:nome%"
-			+ " AND obj.cpf LIKE %:cpf%")
+			+ " AND obj.cpfCnpj LIKE %:cpfCnpj%")
 	public List<Usuario> findByParametros(@Param("codigo") String codigo,
-		@Param("nome") String nome, @Param("cpf") String cpf);
-
-	/*@Transactional(readOnly=true)
-	@Query("SELECT new Usuario(u1.codigo, u1.nome) FROM Usuario u1 "
-		+ " WHERE (u1.codigo = :codigo OR u1.codigo IN " 
-		+ " (SELECT d.dependente FROM UsuarioDependente d WHERE d.usuario = :codigo))")
-	public List<Usuario> findAprovador(@Param("codigo") String codigo);
- 	*/
+		@Param("nome") String nome, @Param("cpfCnpj") String cpfCnpj);
 	
 	@Transactional(readOnly=true)
 	@Query("SELECT new Usuario(obj.codigo, obj.nome) FROM Usuario obj ")
@@ -56,6 +46,19 @@ public interface UsuarioDao extends JpaRepository<Usuario, Integer>  {
 	public Usuario findByEmail(String email);
 
 	@Transactional(readOnly=true)
-	public Usuario findByCpf(String cpf);
+	public Usuario findByCpfCnpj(String cpfCnpj);
+
+	@Transactional(readOnly=true)
+	@Query("SELECT obj FROM Usuario obj WHERE obj.nome LIKE %:nome% ")
+	public Page<Usuario> findByNomeContaining(@Param("nome") String nome, Pageable pageRequest );
+
+	@Transactional(readOnly=true)
+	@Query("SELECT obj FROM Usuario obj "
+			+ " WHERE obj.codigo LIKE %:codigo%"
+			+ " AND obj.nome LIKE %:nome%"
+			+ " AND obj.pessoa LIKE %:pessoa%"
+			+ " AND obj.cpfCnpj LIKE %:cpfCnpj%")
+	public Page<Usuario> findPage(@Param("codigo") String codigo, @Param("nome") String nome, 
+			@Param("pessoa") String pessoa, @Param("cpfCnpj") String cpfCnpj, Pageable pageRequest);
 
 }

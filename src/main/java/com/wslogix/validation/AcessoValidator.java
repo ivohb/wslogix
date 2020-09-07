@@ -12,12 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
 import com.wslogix.dao.AcessoDao;
-import com.wslogix.dao.ModuloDao;
+import com.wslogix.dao.ProcessoDao;
 import com.wslogix.dao.PerfilDao;
 import com.wslogix.dto.AcessoDto;
 import com.wslogix.exception.FieldMessage;
 import com.wslogix.model.Acesso;
-import com.wslogix.model.Modulo;
+import com.wslogix.model.Processo;
 import com.wslogix.model.Perfil;
 import com.wslogix.service.AcessoService;
 
@@ -37,7 +37,7 @@ public class AcessoValidator
 	@Autowired
 	private PerfilDao perfilDao;
 	@Autowired
-	private ModuloDao moduloDao;
+	private ProcessoDao processoDao;
 	
 	@Override
 	public void initialize(AcessoValidation ann) {
@@ -79,13 +79,13 @@ public class AcessoValidator
 			if (perfil == null) {
 				list.add(new FieldMessage("perfil", "objeto_nao_existe"));
 			}
-			if (dto.getModulo() == null || dto.getModulo() == 0) {
+			if (dto.getProcesso() == null || dto.getProcesso() == 0) {
 			} else {
-				Modulo modulo = moduloDao.findByModulo(dto.getModulo());
-				if (modulo == null) {
-					list.add(new FieldMessage("modulo", "objeto_nao_existe"));
+				Processo processo = processoDao.findByProcesso(dto.getProcesso());
+				if (processo == null) {
+					list.add(new FieldMessage("processo", "objeto_nao_existe"));
 				}
-				obj = dao.findByPerfilAndModulo(dto.getPerfil(), dto.getModulo());
+				obj = dao.findByPerfilAndProcesso(dto.getPerfil(), dto.getProcesso());
 				if (obj != null) { 
 					list.add(new FieldMessage("modulo", "objeto_ja_existe"));
 				}

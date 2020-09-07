@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wslogix.dao.UsuarioDao;
@@ -23,6 +24,9 @@ public class UsuarioService {
 
 	@Autowired
 	private EmailService emailService;
+
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	@Value("${img.prefix.user.profile}")
 	private String prefix;	
@@ -72,8 +76,8 @@ public class UsuarioService {
 		return obj;
 	}
 
-	public List<Usuario> findByParametros(String codigo, String nome, String cpf) {
-		return dao.findByParametros(codigo, nome, cpf);
+	public List<Usuario> findByParametros(String codigo, String nome, String cpfCnpj) {
+		return dao.findByParametros(codigo, nome, cpfCnpj);
 	}
 
 	public List<Usuario> findApovadores(String codigo) {
@@ -98,17 +102,28 @@ public class UsuarioService {
 		return dao.findAll(pageRequest);
 	}
 
+	public Page<Usuario> findPage(Integer pagina, Integer 
+			qtdLinha, String ordem, String direcao, String codigo,
+			String nome, String pessoa, String cpfCnpj) {
+		
+		PageRequest pageRequest = PageRequest.of(pagina, qtdLinha, 
+				Direction.valueOf(direcao), ordem);
+		return dao.findPage(codigo, nome, pessoa, cpfCnpj, pageRequest);
+	}
+
 	public Usuario fromDTO(UsuarioDto dto) {
 		Usuario obj = new Usuario();
+		obj.setPessoa(dto.getPessoa());
 		obj.setCodigo(dto.getCodigo());
-		obj.setCpf(dto.getCpf());
+		obj.setCpfCnpj(dto.getCpfCnpj());
 		obj.setEmail(dto.getEmail());
 		obj.setNome(dto.getNome());
-		obj.setSexo(dto.getSexo());
+		obj.setSenha(pe.encode(dto.getSenha()));
 		obj.setPerfil(dto.getPerfil());
 		obj.setTelefone(dto.getTelefone());
 		obj.setCelular(dto.getCelular());
 		obj.setSituacao(dto.getSituacao());
+		obj.setCodigoErp(dto.getCodigoErp());
 		return obj;
 	}
 
@@ -117,20 +132,21 @@ public class UsuarioService {
 	}
 
 	public Usuario insert(Usuario obj) {
-		String newPass = "xxxxx";
-		obj.setSenha(newPass);
 		obj.setSituacao("I");
 		obj = dao.save(obj);
-		emailService.sendNewPasswordEmail(obj, newPass);
 		return obj;
 	}
 
 	public Usuario update(UsuarioDto dto, Integer id) {
 		Usuario newObj = findById(id);
+		newObj.setPessoa(dto.getPessoa());
 		newObj.setNome(dto.getNome());
 		newObj.setEmail(dto.getEmail());
-		newObj.setCpf(dto.getCpf());
-		newObj.setSexo(dto.getSexo());
+		newObj.setCpfCnpj(dto.getCpfCnpj());
+		newObj.setCodigoErp(dto.getCodigoErp());
+		newObj.setCelular(dto.getCelular());
+		newObj.setTelefone(dto.getTelefone());
+		newObj.setPerfil(dto.getPerfil());
 		
 		if (!(dto.getSituacao().equalsIgnoreCase("I")))  {			
 			newObj.setSituacao(dto.getSituacao());
@@ -143,9 +159,9 @@ public class UsuarioService {
 	}
 
 	public void delete(Integer id) {	
-		Usuario u = findById(id);
-		if (u.getSituacao().equalsIgnoreCase("I")) {
-			dao.deleteById(u.getId());
+		Usuario obj = findById(id);
+		if (obj.getSituacao().equalsIgnoreCase("I")) {
+			dao.deleteById(obj.getId());
 		}		
 	}
 

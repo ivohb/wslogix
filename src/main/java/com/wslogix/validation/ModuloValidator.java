@@ -70,10 +70,11 @@ public class ModuloValidator
 				}
 			}
 		}
-
+		
+		/*
 		if (dto.getPath() == null || dto.getPath().isEmpty()) {
 		} else {
-			obj = dao.findByTitulo(dto.getPath());				
+			obj = dao.findByPath(dto.getPath());				
 			if (obj != null) {
 				if (uriId == 0) {
 					list.add(new FieldMessage("path", "objeto_ja_existe"));
@@ -83,7 +84,7 @@ public class ModuloValidator
 					}					
 				}
 			}
-		}
+		}*/
 										
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();

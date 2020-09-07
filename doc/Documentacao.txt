@@ -1,0 +1,24 @@
+. Login
+- Como os ERPs geralmente são multi-empresa, para fazer o login deverão ser informados
+  código, senha e empresa. A empresa será devolvida para a aplicação no cabeçalho da
+  requisição, juntamente com o token e o perfil do usuário, como seue:
+  Authorization: token, o qual estará precedido pela palavra token + espaço;
+  Profile: código do pefil
+  Empresa: código da empresa
+  Obs: a empresa e o token deverão ser devolvidos ao WS nas próximas requisições.
+  
+. Edi cliente
+- Criar tabelas do tipo mestre-detalhe
+- Deverá ser criada uma lista de programação para cada produto.
+- Cada produto só poderá ter uma lista em elaboração (campo situacao = E)
+- A tabela mestre deverá conter, entre outros, a empresa, o cliente, o pedido de compra e o produto
+- Na tabela de detalhes, a date de entrega não poderá se repetir
+- Para incluir uma nova lista de um deteminado peoduto, o cliente poderá
+  iniciar do zero ou clonar uma lista pré existente e fazer as correções.
+  Nesse caso, a clonagem deverá descartar as progamações do tipo C (confirmada)
+- Na inegração com a carteira, o usuário deverá selecionar uma lista com
+  situacao = C (concluida) e, após a integração, marcar a lista com situação = I (integrada)
+- Para efetuar o cadastro da lista, o código do cliente deverá ser obtido a partir do cnpj do
+  cliente que está no cadastro do usuário.
+    
+    

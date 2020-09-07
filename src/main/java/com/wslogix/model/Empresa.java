@@ -7,6 +7,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -73,6 +77,10 @@ public class Empresa implements Serializable {
 
 	@Column(name = "dat_fundacao")
 	@JsonFormat(pattern="dd/MM/yyyy")
+<<<<<<< HEAD
+=======
+	@Temporal(TemporalType.DATE)
+>>>>>>> bb11b953a54ef8400362656e9f9f2d262dac7f76
 	private Date datFundacao;
 
 	@Column(name = "cod_cliente", length = 15)
@@ -80,10 +88,11 @@ public class Empresa implements Serializable {
 
 	public Empresa() {}
 	
-	public Empresa(String id, String nome, String codinome) {
+	public Empresa(String id, String codinome, String nome, String cnpj ) {
 		this.id = id;
-		this.nome = nome;
 		this.codinome = codinome;
+		this.nome = nome;
+		this.cnpj = cnpj;
 	}	
 
 	public Empresa(String id, String codinome, String nome, String cnpj, String chave) {

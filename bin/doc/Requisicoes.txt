@@ -1,0 +1,63 @@
+endpoint
+
+GET /tickets Retorna a lista de bilhetes
+GET /tickets/12 Retorna um bilhete específico
+POST /tickets Cria um novo bilhete
+PUT /tickets/12 Atualiza o bilhete #12
+PATCH /tickets/12 Atualiza parcialmente o bilhete #12
+DELETE /tickets/12 Apaga o bilhete #12
+
+Considerando que um tickets contém um conjunto de mensagens:
+
+GET /tickets/12/messages Retorna a lista de mensagens do bilhete #12
+GET /tickets/12/messages/5 Retorna a mensagem #5 do bilhete #12
+POST /tickets/12/messages Cria uma nova mensagem no bilhete #12
+PUT /tickets/12/messages/5 Atualiza a mensagem #5 do bilhete #12
+PATCH /tickets/12/messages/5 Atualiza parcialmente a mensagem #5 do bilhete #12
+DELETE /tickets/12/messages/5 Apaga a mensagem #5 do bilhete #12
+
+Filtragem
+Para filtragem, usa-se um parâmetro de consulta exclusivo para cada campo que implementa a filtragem. 
+Por exemplo, ao solicitar uma lista de bilhetes a partir do endpoint /tickets, pode-se querer limitar 
+o resultado para apenas aqueles no estado “aberto” (open). Isto poderia ser conseguido com 
+um pedido GET /tickets?state=open, no qual state é um parâmetro de consulta que implementa um filtro.
+
+Ordenação
+Similarmente à filtragem, um parâmetro genérico sort pode ser usado para descrever regras de ordenação, 
+permitindo requisitos complexos de ordenação deixando este parâmetro em classificações em que cada campo 
+é separado por vírgula, cada um com um possível unário negativo para indicar ordem descendente. 
+Por exemplo:
+
+GET /tickets?sort=-priority Retorna uma lista de bilhetes em ordem descendente de prioridade
+GET /tickets?sort=-priority,created_at Retorna uma lista de bilhetes em ordem descendente de 
+prioridade com uma prioridade específica de bilhetes antigos primeiro
+Busca
+Às vezes filtros básicos não são suficientes e é necessário o poder de buscar textos 
+completos (full text search) — talvez você já esteja usando ElasticSearch ou alguma outra 
+tecnologia de busca baseada em Lucene. Quando pesquisa de texto completo é usado como um mecanismo 
+de recuperação de instâncias de recursos para um tipo específico de recurso, ela pode ser exposta 
+na API como um parâmetro de consulta no nó de extremidade do recurso. Considerando q, as consultas 
+de pesquisa devem ser passados diretamente para o motor de busca e o retorno da API deve ser no 
+mesmo formato, como resultado normal em lista.
+
+Combinando tudo isso, é possível construir queries como:
+
+GET /tickets?sort=-updated_at Retorna bilhetes recém-atualizados
+GET /tickets?state=closed&sort=-updated_at Retorna bilhetes recém-fechados
+GET /tickets?q=return&state=open&sort=-priority,created_at Retorna bilhetes abertos de alta 
+prioridade que contenham o termo “return”
+Nomes alternativos (aliases) para queries comuns
+Para tornar a experiência API mais agradável para o consumidor médio, é possível considerar “empacotar” 
+conjuntos de condições em caminhos RESTful de fácil acesso. Por exemplo, a consulta por bilhetes 
+recém-fechados acima poderia ser disponibilizada como GET /tickets/recently_closed.
+
+Limitando quais campos são retornados pela API
+O consumidor da API nem sempre precisa da representação completa de um recurso. A capacidade de 
+selecionar e escolher campos retornados permite que o consumidor minimize o tráfego de rede e 
+acelere sua própria utilização da API.
+
+Por exemplo, é possível usar um parâmetro de consulta campos que leva uma lista de campos a 
+serem incluídos separados por vírgulas, de maneira que o seguinte pedido iria recuperar 
+informações suficientes apenas para exibir uma lista ordenada de bilhetes em aberto:
+
+GET /tickets?fields=id,subject,customer_name,updated_at&state=open&sort=-updated_at

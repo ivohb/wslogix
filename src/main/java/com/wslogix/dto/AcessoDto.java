@@ -2,7 +2,7 @@ package com.wslogix.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.wslogix.validation.AcessoValidation;
 
@@ -11,16 +11,23 @@ public class AcessoDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	@Min(1)
+	@NotNull
 	private Integer perfil;	
-	@Min(1)
-	private Integer modulo;
-
+	private String nome;
+	@NotNull
+	private Integer processo;
+	private String titulo;
+	private String modulo;
+	
 	public AcessoDto() {	}
 
-	public AcessoDto(Integer id, Integer perfil, Integer modulo) {
+	public AcessoDto(Integer id, Integer perfil, 
+			Integer processo, String nome, String titulo, String modulo) {
 		this.id = id;
 		this.perfil = perfil;
+		this.processo = processo;
+		this.nome = nome;
+		this.titulo = titulo;
 		this.modulo = modulo;
 	}
 
@@ -40,12 +47,36 @@ public class AcessoDto implements Serializable {
 		this.perfil = perfil;
 	}
 
-	public Integer getModulo() {
+	public Integer getProcesso() {
+		return processo;
+	}
+
+	public void setProcesso(Integer processo) {
+		this.processo = processo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getModulo() {
 		return modulo;
 	}
 
-	public void setModulo(Integer modulo) {
+	public void setModulo(String modulo) {
 		this.modulo = modulo;
 	}
-		
+
 }

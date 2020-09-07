@@ -34,9 +34,17 @@ public class EmpresaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
+<<<<<<< HEAD
 	@RequestMapping(value="/data", method=RequestMethod.GET)
 	public ResponseEntity<List<Empresa>> findByDate(
 			@RequestParam(value="data", defaultValue="") Date data) {
+=======
+	//http://localhost:8081/empresa/data?data=04/20/1956 - MM/dd/yyyy
+	
+	@RequestMapping(value="/data", method=RequestMethod.GET)
+	public ResponseEntity<List<Empresa>> findByDate(
+			@RequestParam(value="data", defaultValue="01/31/1890") Date data) {
+>>>>>>> bb11b953a54ef8400362656e9f9f2d262dac7f76
 				
 		List<Empresa> list = service.findByDate(data);
 		return ResponseEntity.ok().body(list);
@@ -49,7 +57,7 @@ public class EmpresaResource {
 		return ResponseEntity.ok().body(list);
 	}
 
-	@RequestMapping(value="/auth",method=RequestMethod.GET)
+	@RequestMapping(value="/autorizada",method=RequestMethod.GET)
 	public ResponseEntity<List<Empresa>> findAuth() {
 		List<Empresa> list = service.findAuth();
 		return ResponseEntity.ok().body(list);

@@ -19,16 +19,16 @@ public class Acesso implements Serializable {
 	
 	private Integer perfil;	
 	
-	private Integer modulo;
+	private Integer processo;
 		
 	public Acesso() {}
 
 
-	public Acesso(Integer id, Integer perfil, Integer modulo) {
+	public Acesso(Integer id, Integer perfil, Integer processo) {
 		super();
 		this.id = id;
 		this.perfil = perfil;
-		this.modulo = modulo;
+		this.processo = processo;
 	}
 
 	public Integer getId() {
@@ -47,11 +47,11 @@ public class Acesso implements Serializable {
 		this.perfil = perfil;
 	}
 
-	public Integer getModulo() {
-		return modulo;
+	public Integer getProcesso() {
+		return processo;
 	}
 
-	public void setModulo(Integer modulo) {
-		this.modulo = modulo;
-	}		
+	public void setProcesso(Integer processo) {
+		this.processo = processo;
+	}
 }

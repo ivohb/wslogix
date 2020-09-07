@@ -8,6 +8,7 @@ login
 inclusão de usário
 
 {
+<<<<<<< HEAD
  "codigo" : "admlog",
  "nome" : "Administrador do sistema",
  "email" : "cantor.ivo.jose@gmail.com",
@@ -24,6 +25,17 @@ inclusão de usário
 	private String email;
 	private String cpf;
 
+=======
+ "pessoa"    : "F",
+ "codigo"    : "ivo",
+ "nome"      : "Ivo Barbosa",
+ "email"     : "ivohb.me@gmail.com",
+ "cpfCnpj"   : "00167409808",
+ "perfil"    : "1",
+ "codigoErp" : "admlog"
+ }
+
+>>>>>>> bb11b953a54ef8400362656e9f9f2d262dac7f76
   inclusão de usuário dependente
   
   {

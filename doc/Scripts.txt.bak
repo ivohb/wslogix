@@ -1,0 +1,87 @@
+cod_empresa varchar(2) NOT NULL,
+cod_item varchar(15) NOT NULL,
+den_item varchar(76) NOT NULL,
+den_item_reduz varchar(18) NULL,
+cod_unid_med varchar(3) NOT NULL,
+pes_unit decimal() identity(12) NOT NULL,
+ies_tip_item varchar(1) NOT NULL,
+dat_cadastro smalldatetime NULL,
+ies_ctr_estoque varchar(1) NOT NULL,
+ies_ctr_lote varchar(1) NOT NULL,
+ies_situacao varchar(1) NOT NULL,
+
+cod_familia varchar(3) NOT NULL,
+cod_local_estoq varchar(10) NULL,
+gru_ctr_estoq decimal() identity(2) NULL,
+
+cod_lin_prod decimal() identity(2) NOT NULL,
+cod_lin_recei decimal() identity(2) NOT NULL,
+cod_seg_merc decimal() identity(2) NOT NULL,
+cod_cla_uso decimal() identity(2) NOT NULL,
+
+
+pct_ipi decimal() identity(6) NOT NULL,
+fat_conver decimal() identity(11) NOT NULL,
+cod_cla_fisc varchar(10) NOT NULL,
+ies_tem_inspecao varchar(1) NOT NULL,
+cod_local_insp varchar(10) NULL,
+
+
+CREATE TABLE logix.item_em_terc
+
+(cod_empresa varchar(2) NOT NULL,
+num_nf decimal() identity(7) NOT NULL,
+num_sequencia decimal() identity(5) NOT NULL,
+dat_emis_nf smalldatetime NOT NULL,
+cod_fornecedor varchar(15) NOT NULL,
+ies_incl_contab varchar(1) NOT NULL,
+dat_inclusao_seq smalldatetime NOT NULL,
+cod_cla_fisc varchar(10) NOT NULL,
+cod_item varchar(15) NULL,
+den_item varchar(50) NOT NULL,
+cod_unid_med varchar(3) NOT NULL,
+dat_emis_nf_usina smalldatetime NULL,
+dat_retorno_prev smalldatetime NULL,
+cod_motivo_remessa varchar(2) NOT NULL,
+qtd_tot_remessa decimal() identity(15) NOT NULL,
+val_estoque decimal() identity(17) NOT NULL,
+val_remessa decimal() identity(17) NOT NULL,
+val_icms decimal() identity(17) NOT NULL,
+val_ipi decimal() identity(17) NOT NULL,
+qtd_tot_recebida decimal() identity(15) NOT NULL,
+cod_area_negocio varchar(2) NULL,
+cod_lin_negocio varchar(2) NULL,
+num_conta varchar(23) NULL,
+tex_observ varchar(30) NULL,
+prim_ped_prorrog decimal() identity(6) NOT NULL,
+prim_dat_vencto smalldatetime NOT NULL,
+seg_ped_prorrog decimal() identity(6) NOT NULL,
+seg_dat_vencto smalldatetime NOT NULL,
+terc_ped_prorrog decimal() identity(6) NOT NULL,
+terc_dat_vencto smalldatetime NOT NULL,
+PRIMARY KEY (cod_empresa,num_nf,num_sequencia,cod_fornecedor))
+
+GO
+
+CREATE TABLE logix.item_esp
+
+(cod_empresa varchar(2) NOT NULL,
+cod_item varchar(15) NOT NULL,
+num_seq decimal() identity(2) NOT NULL,
+des_esp_item varchar(4000) NOT NULL,
+PRIMARY KEY (cod_empresa,cod_item,num_seq))
+
+GO
+
+CREATE TABLE logix.audit_item
+
+(cod_empresa varchar(2) NOT NULL,
+cod_item varchar(15) NOT NULL,
+texto varchar(200) NULL,
+num_programa varchar(10) NOT NULL,
+dat_cadastro smalldatetime NOT NULL,
+dat_atualiz_cad smalldatetime NULL,
+num_revisao decimal() identity(3) NOT NULL,
+hor_proces varchar(8) NOT NULL,
+nom_usuario varchar(8) NOT NULL)
+

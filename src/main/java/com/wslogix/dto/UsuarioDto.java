@@ -3,12 +3,10 @@ package com.wslogix.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
 
 import com.wslogix.model.Usuario;
 import com.wslogix.validation.UsuarioValidation;
@@ -20,6 +18,10 @@ public class UsuarioDto implements Serializable {
 	private Integer id;
 
 	@NotNull(message = "campo_obrigatorio")
+	@Pattern(regexp="[FJ]", message = "conteudo_invalido")
+	private String pessoa;
+
+	@NotNull(message = "campo_obrigatorio")
 	@Length(min=3, max=15, message="tamanho_campo_invalido")
 	private String codigo;
 
@@ -27,20 +29,17 @@ public class UsuarioDto implements Serializable {
 	@Length(min=3, max=30, message="tamanho_campo_invalido")
 	private String nome;		
 
+	//@JsonIgnore
+	private String senha;
+
 	@NotNull(message = "campo_obrigatorio")
 	@Email(message="email_invalido")
 	private String email;
-	
-	
-	@NotNull(message = "campo_obrigatorio")
-	@CPF(message = "cpf_invalido")
-	private String cpf;
 		
 	@NotNull(message = "campo_obrigatorio")
-	@Pattern(regexp="[MF]", message = "conteudo_invalido")
-	private String sexo;
-	
-	@Min(1)
+	private String cpfCnpj;
+			
+	@NotNull(message = "campo_obrigatorio")
 	private Integer perfil;
 
 	//@Pattern(regexp="\\(\\d{2}\\)\\d{4}-\\d{4}", message = "conteudo_invalido")
@@ -54,19 +53,23 @@ public class UsuarioDto implements Serializable {
 	@Pattern(regexp="[AIS]", message = "conteudo_invalido")
 	private String situacao;
 
+	private String codigoErp; //código do usuario no ERP
+
 	public UsuarioDto() { }
 	
 	public UsuarioDto(Usuario obj) {
 		this.id = obj.getId();
+		this.pessoa = obj.getPessoa();
 		this.codigo = obj.getCodigo();
 		this.nome = obj.getNome();
+		this.senha = obj.getSenha();
 		this.email = obj.getEmail();
-		this.cpf = obj.getCpf();
-		this.sexo = obj.getSexo();
+		this.cpfCnpj = obj.getCpfCnpj();
 		this.perfil = obj.getPerfil();
 		this.telefone = obj.getTelefone();
 		this.celular = obj.getCelular();
 		this.situacao = obj.getSituacao();
+		this.codigoErp = obj.getCodigoErp();
 	}
 
 	public Integer getId() {
@@ -75,6 +78,14 @@ public class UsuarioDto implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(String pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	public String getCodigo() {
@@ -93,6 +104,14 @@ public class UsuarioDto implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -101,20 +120,12 @@ public class UsuarioDto implements Serializable {
 		this.email = email;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCpfCnpj() {
+		return cpfCnpj;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
+	public void setCpfCnpj(String cpfCnpj) {
+		this.cpfCnpj = cpfCnpj;
 	}
 
 	public Integer getPerfil() {
@@ -126,7 +137,7 @@ public class UsuarioDto implements Serializable {
 	}
 
 	public String getTelefone() {
-		return((telefone != null) ? telefone : "");
+		return telefone;
 	}
 
 	public void setTelefone(String telefone) {
@@ -134,8 +145,7 @@ public class UsuarioDto implements Serializable {
 	}
 
 	public String getCelular() {
-		return((celular != null) ? celular : "");
-
+		return celular;
 	}
 
 	public void setCelular(String celular) {
@@ -149,5 +159,13 @@ public class UsuarioDto implements Serializable {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
-	
+
+	public String getCodigoErp() {
+		return codigoErp;
+	}
+
+	public void setCodigoErp(String codigoErp) {
+		this.codigoErp = codigoErp;
+	}
+
 }

@@ -19,7 +19,10 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
+
+	@Column(length = 1, nullable = false)
+	private String pessoa; //F=Física J=Juridica
+
 	@Column(length = 15, unique = true, nullable = false)
 	private String codigo;
 	
@@ -27,17 +30,14 @@ public class Usuario implements Serializable {
 	private String nome;
 	
 	@JsonIgnore //enibe retorno da senha no json
-	@Column(length = 65)
+	@Column(length = 65, nullable = false)
 	private String senha;
 	
 	@Column(length = 50, nullable = false)
 	private String email;
 	
 	@Column(length = 14, nullable = false, unique = true)
-	private String cpf;
-
-	@Column(length = 1, nullable = false)
-	private String sexo;
+	private String cpfCnpj;
 
 	@Column(nullable = false)
 	private Integer perfil;
@@ -50,7 +50,10 @@ public class Usuario implements Serializable {
 
 	@Column(length = 1, nullable = false)
 	private String situacao; //A/I/S
-	
+
+	@Column(length = 30)
+	private String codigoErp; //código do usuario no ERP
+
 	public Usuario() {	}	
 	
 	public Usuario(String nome) {
@@ -68,7 +71,15 @@ public class Usuario implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}	
+	}
+
+	public String getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(String pessoa) {
+		this.pessoa = pessoa;
+	}
 
 	public String getCodigo() {
 		return codigo;
@@ -102,22 +113,14 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCpfCnpj() {
+		return cpfCnpj;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCpfCnpj(String cpfCnpj) {
+		this.cpfCnpj = cpfCnpj;
 	}
 
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-	
 	public Integer getPerfil() {
 		return perfil;
 	}
@@ -125,7 +128,7 @@ public class Usuario implements Serializable {
 	public void setPerfil(Integer perfil) {
 		this.perfil = perfil;
 	}
-	
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -150,13 +153,12 @@ public class Usuario implements Serializable {
 		this.situacao = situacao;
 	}
 
+	public String getCodigoErp() {
+		return codigoErp;
+	}
 
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", codigo=" + codigo + ", nome=" + nome 
-			+ ", senha=" + senha + ", email=" + email + ", cpf=" + cpf 
-			+ ", sexo=" + sexo + ", perfil=" + perfil + ", telefone=" + telefone 
-			+ ", celular=" + celular + ", situacao=" + situacao + "]";
+	public void setCodigoErp(String codigoErp) {
+		this.codigoErp = codigoErp;
 	}
 
 	@Override
